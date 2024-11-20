@@ -10,9 +10,22 @@
 		6DE0687B2CEDD86200ECA937 /* SkullAR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkullAR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		6DE068AE2CEDE77400ECA937 /* Exceptions for "SkullAR" folder in "SkullAR" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 6DE0687A2CEDD86200ECA937 /* SkullAR */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		6DE0687D2CEDD86200ECA937 /* SkullAR */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				6DE068AE2CEDE77400ECA937 /* Exceptions for "SkullAR" folder in "SkullAR" target */,
+			);
 			path = SkullAR;
 			sourceTree = "<group>";
 		};
@@ -32,8 +45,8 @@
 		6DE068722CEDD86200ECA937 = {
 			isa = PBXGroup;
 			children = (
-				6DE0687D2CEDD86200ECA937 /* SkullAR */,
 				6DE0687C2CEDD86200ECA937 /* Products */,
+				6DE0687D2CEDD86200ECA937 /* SkullAR */,
 			);
 			sourceTree = "<group>";
 		};
@@ -249,17 +262,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SkullAR/SkullAR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SkullAR/Preview Content\"";
 				DEVELOPMENT_TEAM = CWTYGSC7Z7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SkullAR/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app has quick look and needs to access camera for doing Augmented Reality";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs to access your microphone in order to do speech recognition ";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app needs to access your speech for doing speech recognition as input";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -278,17 +297,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = SkullAR/SkullAR.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SkullAR/Preview Content\"";
 				DEVELOPMENT_TEAM = CWTYGSC7Z7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SkullAR/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app has quick look and needs to access camera for doing Augmented Reality";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app needs to access your microphone in order to do speech recognition ";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "This app needs to access your speech for doing speech recognition as input";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
