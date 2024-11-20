@@ -1,1 +1,2 @@
 *.usdz filter=lfs diff=lfs merge=lfs -text
+SkullAR/3D[[:space:]]Model/*.usdz filter=lfs diff=lfs merge=lfs -text
