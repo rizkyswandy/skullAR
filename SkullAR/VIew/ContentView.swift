@@ -10,86 +10,99 @@ import QuickLook
 
 struct ContentView: View {
     @StateObject private var viewModel = ContentViewModel()
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.verticalSizeClass) private var verticalSizeClass
     
-    let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible())
-    ]
+    // Dynamic grid columns based on size class
+    var columns: [GridItem] {
+        horizontalSizeClass == .compact ?
+            [GridItem(.flexible()), GridItem(.flexible())] :
+            [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    }
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Image("background")
-                    .resizable()
-                    .scaledToFill()
-                    .edgesIgnoringSafeArea(.all)
-                
-                VStack(spacing: 30) {
-                    Text("AR Content - Voice Search")
-                        .font(.title)
-                        .bold()
-                        .padding(.top, 120)
+            GeometryReader { geometry in
+                ZStack {
+                    GeometryReader { geo in
+                        Image("background")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: geo.size.width, height: geo.size.height)
+                            .clipped()
+                            .ignoresSafeArea(.all)
+                    }
+                    .ignoresSafeArea(.all)
                     
-                    Text("What skull would you like to see?      Say one of these word")
-                        .font(.title2)
-                        .multilineTextAlignment(.center)
-                        .padding(.horizontal)
-                    
-                    // Grid of available options
-                    LazyVGrid(columns: columns, spacing: 20) {
-                        ForEach(["Bear", "Hyena", "Leopard", "Sloth"], id: \.self) { option in
-                            Text(option)
-                                .font(.headline)
+                    ScrollView {
+                        VStack(spacing: geometry.size.height * 0.03) {
+                            Text("AR Content - Voice Search")
+                                .font(.system(size: geometry.size.height * 0.04))
+                                .bold()
+                                .padding(.top, geometry.size.height * 0.08)
+                                .minimumScaleFactor(0.5)
+                            
+                            Text("What skull would you like to see? Say one of these word")
+                                .font(.system(size: geometry.size.height * 0.025))
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal)
+                                .minimumScaleFactor(0.5)
+                            
+                            // Grid of available options
+                            LazyVGrid(columns: columns, spacing: geometry.size.width * 0.05) {
+                                ForEach(["Bear", "Hyena", "Leopard", "Sloth"], id: \.self) { option in
+                                    OptionItemView(text: option, geometry: geometry)
+                                }
+                            }
+                            .padding(.horizontal)
+                            
+                            if let errorMessage = viewModel.errorMessage {
+                                Text(errorMessage)
+                                    .foregroundColor(.red)
+                                    .font(.system(size: geometry.size.height * 0.02))
+                                    .padding()
+                            }
+                            
+                            Text(viewModel.transcript)
+                                .font(.system(size: geometry.size.height * 0.02))
                                 .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
                                 .padding()
-                                .background(Color.white.opacity(0.2))
-                                .cornerRadius(10)
+                                .animation(.default, value: viewModel.transcript)
+                            
+                            Spacer(minLength: geometry.size.height * 0.25)
+                            
+                            MicrophoneButton(
+                                isRecording: viewModel.isRecording,
+                                geometry: geometry,
+                                action: viewModel.toggleRecording
+                            )
+                            .padding(.bottom, geometry.size.height * 0.08)
                         }
-                    }
-                    .padding(.horizontal)
-                    
-                    if let errorMessage = viewModel.errorMessage {
-                        Text(errorMessage)
-                            .foregroundColor(.red)
-                            .padding()
-                    }
-                    
-                    Text(viewModel.transcript)
-                        .font(.body)
                         .foregroundColor(.white)
-                        .padding()
-                        .animation(.default, value: viewModel.transcript)
-                    
-                    Spacer()
-                    
-                    MicrophoneButton(isRecording: viewModel.isRecording) {
-                        viewModel.toggleRecording()
                     }
-                    .padding(.bottom, 100)
                 }
-                .foregroundColor(.white)
             }
         }
         .quickLookPreview($viewModel.selectedModelURL)
     }
 }
 
-
 struct OptionItemView: View {
     let text: String
+    let geometry: GeometryProxy
     
     var body: some View {
         Text(text)
-            .font(.headline)
+            .font(.system(size: geometry.size.height * 0.022))
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
-            .padding()
+            .padding(geometry.size.width * 0.03)
             .background(
                 RoundedRectangle(cornerRadius: 10)
                     .fill(Color.white.opacity(0.2))
                     .shadow(color: .black.opacity(0.2), radius: 5, x: 0, y: 2)
             )
+            .frame(height: geometry.size.height * 0.06)
     }
 }
 
